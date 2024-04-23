@@ -10,10 +10,21 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/styles/**")
-                .addResourceLocations("classpath:/static/styles/");
+        registry.addResourceHandler("/css/**")
+                .addResourceLocations("classpath:/static/css/");
+
         registry.addResourceHandler("/images/**")
                 .addResourceLocations("classpath:/static/images/");
+
+        registry.addResourceHandler("/bootstrap/**")
+                .addResourceLocations("classpath:/static/bootstrap/");
+
+        registry.addResourceHandler("/fonts/**")
+                .addResourceLocations("classpath:/static/fonts/");
+
+        registry.addResourceHandler("/js/**")
+                .addResourceLocations("classpath:/static/js/");
+
     }
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {

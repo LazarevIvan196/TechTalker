@@ -38,6 +38,7 @@ public class TopicController {
     public String index(Model model) {
         List<TopicDto> latestTopics = topicService.findLatestTopics();
         model.addAttribute("topics", latestTopics);
+
         return "index";
     }
 

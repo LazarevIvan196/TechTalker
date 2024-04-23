@@ -13,8 +13,6 @@ import org.springframework.stereotype.Service;
 import com.example.techtalker.entity.User;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.Collections;
 import java.util.List;
 
@@ -22,19 +20,17 @@ import java.util.List;
 @AllArgsConstructor
 @Service
 public class UserService implements UserDetailsService {
-    @PersistenceContext
-    private EntityManager entityManager;
+
     private UserRepository userRepository;
     final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findUserByUsername(username)
+        return userRepository.findUserByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Пользователь с именем: " + username + " не найден"));
-        return user;
     }
 
-
+    @SuppressWarnings("unused")
     public User findUserById(Long userId) {
         return userRepository.findById(userId)
                 .orElseThrow(() -> new UsernameNotFoundException("Пользователь с ID: " + userId + " не найден"));
@@ -46,9 +42,7 @@ public class UserService implements UserDetailsService {
     }
 
     public List<User> allUsers() {
-        List<User> allUsers = userRepository.findAll();
-
-        return allUsers;
+        return userRepository.findAll();
     }
 
     @Transactional
@@ -68,12 +62,10 @@ public class UserService implements UserDetailsService {
         return true;
     }
 
-    @Transactional
     public void deleteUser(Long userId) {
-
-        userRepository.findById(userId).isPresent();
+        userRepository.findById(userId)
+                .orElseThrow(() -> new UsernameNotFoundException("Пользователь с ID: " + userId + " не найден"));
         userRepository.deleteById(userId);
-
     }
 
 }

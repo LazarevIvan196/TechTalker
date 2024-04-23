@@ -9,6 +9,7 @@ import com.example.techtalker.repositoryes.AttachmentRepository;
 import com.example.techtalker.repositoryes.MessageRepository;
 import com.example.techtalker.repositoryes.TopicRepository;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
